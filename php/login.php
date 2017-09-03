@@ -8,7 +8,7 @@
 				$username = htmlentities (trim ($_POST['username']), ENT_NOQUOTES);
 				$password = htmlentities (trim ($_POST['password']), ENT_NOQUOTES);
 				@$hashed_password = crypt($password);
-				$db = new PDO('mysql:host=localhost;dbname=WebSec01', "root", "LaZ-s7-z");
+				$db = new PDO('mysql:host=localhost;dbname=WebSec01', "root", "");
 				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 				// Check if login try is more than number 3
