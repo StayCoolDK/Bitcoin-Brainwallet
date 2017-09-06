@@ -29,19 +29,18 @@
 					$fPassword = $row['Password'];
 					$bPassword = password_verify($password, $fPassword);
 
-					// Add login attempt to database
-					$loginTry = $db->prepare("INSERT INTO login_try (ip, username, password) VALUES (:ip, :username, :password)");
-					$loginTry->bindValue(":ip", $_SERVER['REMOTE_ADDR']);
-					$loginTry->bindValue(":username", $username);
-					$loginTry->bindValue(":password", $hashed_password);
-					$loginTry->execute();
-
 					if($bPassword){
 						echo 'Login Success';
 						$db = null;
 					}
 					else {
 						echo 'Login Fail';
+						// Add login attempt to database
+					$loginTry = $db->prepare("INSERT INTO login_try (ip, username, password) VALUES (:ip, :username, :password)");
+					$loginTry->bindValue(":ip", $_SERVER['REMOTE_ADDR']);
+					$loginTry->bindValue(":username", $username);
+					$loginTry->bindValue(":password", $hashed_password);
+					$loginTry->execute();
 						$db = null;
 					}
 				

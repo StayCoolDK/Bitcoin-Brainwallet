@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
 body {
   display: flex;
   flex-direction: column;
@@ -17,6 +18,12 @@ body {
   background-color: #FFF;
   padding: 20px;
   border-radius: 5px; }
+
+.h1title {
+  border-bottom: 2px solid #00c4ff;
+  padding-bottom: 7.5px;
+  color: black;
+  font-family: 'Noto Sans', sans-serif; }
 
 .app-title {
   text-align: center;
@@ -41,9 +48,9 @@ input:focus {
   border: 2px solid #3498DB;
   box-shadow: none; }
 
-.loginbtn, .registerbtn {
+.loginbtn {
   border: 2px solid transparent;
-  background: #3498DB;
+  background: #4CAF50;
   color: #ffffff;
   font-size: 16px;
   line-height: 25px;
@@ -55,18 +62,33 @@ input:focus {
   transition: 0.25s;
   display: block;
   width: 250px;
-  margin: 0 auto; }
-
-.loginbtn:hover {
-  background-color: #2980B9; }
-
-.returnlink {
-  margin-top: 10px;
-  font-size: 14px;
-  text-decoration: underline;
+  margin: 0 auto;
   cursor: pointer; }
 
-.link {
+.registerbtn {
+  border: 2px solid transparent;
+  background: #FF9800;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+  cursor: pointer; }
+
+.registerbtn:hover {
+  background-color: #F57C00; }
+
+.loginbtn:hover {
+  background-color: #388E3C; }
+
+.returnlink, .link, .terms {
   margin-top: 10px;
   font-size: 14px;
   text-decoration: underline;

@@ -24,6 +24,13 @@ $(document).on("submit", ".loginform", function(e){
 });
 
 $(document).on("click", ".registerbtn", function(e){
+
+  var sUsername = $(".rUsername").val();
+  var sPassword = $(".rPassword").val();
+
+  if(sUsername == "" || sPassword == ""){
+  	//swal("Empty imput", "Please type a username and a password", "warning");
+  }else {
 	$(".registrationform").submit();
 		e.preventDefault();
 		$.ajax({
@@ -42,6 +49,7 @@ $(document).on("click", ".registerbtn", function(e){
 				swal("Username already exists", "Please choose a different one", "warning");
 			}
 		});
+	}
 });
 
 $(document).on("click", ".link", function(){
@@ -61,7 +69,8 @@ $(document).on("click", ".link", function(){
 							<input type="password" name="password" class="rPassword" placeholder="password" required>\
 							<br><br>\
 							<input type="submit" class="registerbtn" value="Register">\
-							<div class="returnlink">Back to login page</div>\
+							<div class="returnlink">Return to login</div>\
+							<div class="terms">Terms</div>\
 						</form>\
 					</div>\
 				</div>\
