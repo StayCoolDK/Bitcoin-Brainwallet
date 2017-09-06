@@ -9,15 +9,17 @@ $(document).on("submit", ".loginform", function(e){
 		                password: $(".password").val()
 		    }
 		}).done(function(sData){
-		if (sData == "You are now logged in."){
+
+		if (sData == "Login Success"){
 				swal("Logged in", "Congratulations!", "success");
 		}
-		else if (sData == "Wrong username or password"){
+		else if (sData == "Login Fail"){
 				swal("WRONG", "WRONG!", "warning");
 		}
-		else if (sData == "Error, you have tried to sign in too many times without succeding, please wait up till 5 minutes."){
-				swal("BANNED", "BANNED!", "error");
+		else if (sData == "You have tried to sign in too many times without succeding, please wait up till 5 minutes."){
+				swal("BANNED", "You've unsuccessfully logged in too many times and you have been banned for 5 minutes.", "error");
 		}
+		
 		});
 });
 
@@ -31,13 +33,13 @@ $(document).on("submit", ".registrationform", function(e){
 					password: $(".rPassword").val()
 		}
 	}).done(function(sData){
+
 		if (sData == "Registration successful"){
-
 			swal("Thank you!", "Registration was successful - you can now login.", "success");
-
+			$("#myModal").fadeOut();
 		}
-		else {
-			swal("Hmm", "Error", "error");
+		else if(sData == "Username already exists") {
+			swal("Username already exists", "Please choose a different one", "warning");
 		}
 	});
 });
