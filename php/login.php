@@ -8,7 +8,7 @@
 				$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 
-				$db = new PDO('mysql:host=localhost;dbname=WebSec01', "user", "keawebdev16");
+				$db = new PDO('mysql:host=localhost;dbname=WebSec01;charset=utf8', "user", "keawebdev16");
 				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 

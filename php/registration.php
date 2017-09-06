@@ -5,6 +5,10 @@ if(isset ($_POST['username']) && isset ($_POST['password'])) {
 		//Trim the input for quotes
 		$sUsername = htmlentities (trim ($_POST['username']), ENT_NOQUOTES);
 		$sPassword = htmlentities (trim ($_POST['password']), ENT_NOQUOTES);
+		//$sEmail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+		//if(filter_var($sEmail, FILTER_VALIDATE_EMAIL)){
+			
+		//}
 
 		//Hash the trimmed input
 		$hPassword = password_hash($sPassword, PASSWORD_DEFAULT);
@@ -15,7 +19,7 @@ if(isset ($_POST['username']) && isset ($_POST['password'])) {
 		$sDate = date("Y/m/d");
 
 		if($bPassword){
-			$db = new PDO('mysql:host=localhost;dbname=WebSec01', "user", "keawebdev16");
+			$db = new PDO('mysql:host=localhost;dbname=WebSec01;charset=utf8', "user", "keawebdev16");
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
@@ -29,7 +33,7 @@ if(isset ($_POST['username']) && isset ($_POST['password'])) {
 
 			    echo 'Username already exists';
 			    $db = null;
-			    
+
 				}
 				else { //Register user
 

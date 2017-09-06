@@ -23,16 +23,15 @@ $(document).on("submit", ".loginform", function(e){
 		});
 });
 
-$(document).on("click", ".registerbtn", function(e){
+$(document).on("submit", ".registerform", function(e){
 
+  e.preventDefault();
   var sUsername = $(".rUsername").val();
   var sPassword = $(".rPassword").val();
 
-  if(sUsername == "" || sPassword == ""){
-  	//swal("Empty imput", "Please type a username and a password", "warning");
-  }else {
-	$(".registrationform").submit();
-		e.preventDefault();
+
+	//$(".registrationform").submit();
+	//	e.preventDefault();
 		$.ajax({
 			url: "./php/registration.php",
 			method: "post",
@@ -49,7 +48,7 @@ $(document).on("click", ".registerbtn", function(e){
 				swal("Username already exists", "Please choose a different one", "warning");
 			}
 		});
-	}
+	
 });
 
 $(document).on("click", ".link", function(){
@@ -64,9 +63,11 @@ $(document).on("click", ".link", function(){
 							<h1 class="h1title">Register</h1>\
 						</div>\
 						<form method="POST" class="registerform">\
-							<input type="text" name="username" class="rUsername" placeholder="username" required>\
+							<input type="text" name="username" class="rUsername" placeholder="&#xf2be; Username" autocomplete="on" required>\
 							<br>\
-							<input type="password" name="password" class="rPassword" placeholder="password" required>\
+							<input type="email" name="email" class="rEmail" placeholder="&#xf003 Email address" autocomplete="on" required><br>\
+							<input type="password" name="password" class="rPassword" placeholder="&#xf084; Password" required><br>\
+							<input type="password" name="password" class="rrPassword" placeholder="&#xf084; Re-type Password" required>\
 							<br><br>\
 							<input type="submit" class="registerbtn" value="Register">\
 							<div class="returnlink">Return to login</div>\
@@ -90,9 +91,9 @@ $(document).on("click", ".returnlink", function(){
 								<h1 class="h1title">Login</h1>\
 							</div>\
 							<form method="POST" class="loginform">\
-								<input type="text" name="username" class="username" placeholder="username" required>\
+								<input type="text" name="username" class="username" placeholder="&#xf2be; Username/email" required>\
 								<br>\
-								<input type="password" name="password" class="password" placeholder="password" required>\
+								<input type="password" name="password" class="password" placeholder="&#xf084; Password" required>\
 								<br><br>\
 								<input type="submit" class="loginbtn" value="Login">\
 								<div class="link">Need to register?</div>\

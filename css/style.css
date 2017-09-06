@@ -10,6 +10,28 @@ body {
   background-color: #03A9F4;
   font-size: 18px; }
 
+::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #607D8B; }
+
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #607D8B;
+  opacity: 1; }
+
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #607D8B;
+  opacity: 1; }
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #607D8B; }
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #607D8B; }
+
 .login, .register {
   margin: 20px auto;
   width: 300px; }
@@ -33,13 +55,16 @@ body {
   text-align: center; }
 
 input {
-  text-align: center;
+  font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+  font-style: normal;
+  text-decoration: inherit;
+  padding: 10px 10px 10px 10px;
+  box-sizing: border-box;
   background-color: #ECF0F1;
   border: 2px solid transparent;
   border-radius: 3px;
   font-size: 16px;
   font-weight: 200;
-  padding: 10px 0;
   width: 250px;
   transition: border .5s;
   margin-top: 10px; }
