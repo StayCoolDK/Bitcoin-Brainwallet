@@ -7,32 +7,31 @@
 </head>
 <body>
 
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close">&times;</span>
-      <h2>Registration</h2>
-    </div>
-    <div class="modal-body">
-	    <form method="POST" class="registrationform">
-	      <input type="text" name="username" class="rUsername" placeholder="username" required> <br> 
-	      <input type="password" name="password" class="rPassword" placeholder="password" required> <br>
-	      <input type="submit" value="Register" class="rSubmit">
-	    </form>
-    </div>
-  </div>
+<div id="wdw-login" class="wdw">
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1 class="h1title">Login</h1>
+			</div>
+
+			<form method="POST" class="loginform">
+				<input type="text" name="username" class="username" placeholder="username" required>
+				<br>
+				<input type="password" name="password" class="password" placeholder="password" required>
+				<br><br>
+				<input type="submit" class="loginbtn" value="Login">
+				<div class="link">Need to register?</div>
+			</form>
+		</div>
+	</div>
 </div>
 
-<div class="login">
-	<form method="POST" class="loginform">
-		<input type="text" name="username" class="username" placeholder="username" required>
-		<br>
-		<input type="password" name="password" class="password" placeholder="password" required>
-		<br><br>
-		<div class="link">Need to register?</div>
-		<input type="submit" class="loginbtn" value="Login">
-	</form>
+
+<div id="wdw-cp" class="wdw">
+
 </div>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./js/sweetalert.min.js"></script>

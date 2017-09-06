@@ -15,7 +15,7 @@ if(isset ($_POST['username']) && isset ($_POST['password'])) {
 		$sDate = date("Y/m/d");
 
 		if($bPassword){
-			$db = new PDO('mysql:host=localhost;dbname=WebSec01', "root", "root");
+			$db = new PDO('mysql:host=localhost;dbname=WebSec01', "user", "keawebdev16");
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
@@ -24,10 +24,12 @@ if(isset ($_POST['username']) && isset ($_POST['password'])) {
 			$checkusername->bindValue(":username", $sUsername);
 			$checkusername->execute();
 			$usernamecount = $checkusername->rowCount();
-			
+
 				if($usernamecount > 0) { //Username already exists
 
 			    echo 'Username already exists';
+			    $db = null;
+			    
 				}
 				else { //Register user
 
