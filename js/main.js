@@ -24,28 +24,26 @@ $(document).on("submit", ".loginform", function(e){
 });
 
 $(document).on("submit", ".registerform", function(e){
-
   e.preventDefault();
-  var sUsername = $(".rUsername").val();
-  var sPassword = $(".rPassword").val();
-
-
-	//$(".registrationform").submit();
-	//	e.preventDefault();
 		$.ajax({
 			url: "./php/registration.php",
 			method: "post",
 			data: {
 						username: $(".rUsername").val(),
-						password: $(".rPassword").val()
+						password: $(".rPassword").val(),
+						email: $(".rEmail").val()
 			}
 		}).done(function(sData){
+
 
 			if (sData == "Registration successful"){
 				swal("Thank you!", "Registration was successful - you can now login.", "success");
 			}
-			else if(sData == "Username already exists") {
-				swal("Username already exists", "Please choose a different one", "warning");
+			else if(sData == "Username or email already exists") {
+				swal("Username or email already exists", "Please choose a different one", "warning");
+			}
+			else if(sData == "There was an error with the email") {
+				swal("There was an error validating the email", "Please retype your email address", "warning");
 			}
 		});
 	
@@ -67,7 +65,7 @@ $(document).on("click", ".link", function(){
 							<br>\
 							<input type="email" name="email" class="rEmail" placeholder="&#xf003 Email address" autocomplete="on" required><br>\
 							<input type="password" name="password" class="rPassword" placeholder="&#xf084; Password" required><br>\
-							<input type="password" name="password" class="rrPassword" placeholder="&#xf084; Re-type Password" required>\
+							<input type="password" name="password2" class="rPassword2" placeholder="&#xf084; Re-type Password" required>\
 							<br><br>\
 							<input type="submit" class="registerbtn" value="Register">\
 							<div class="returnlink">Return to login</div>\

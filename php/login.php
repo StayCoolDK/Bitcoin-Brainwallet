@@ -7,7 +7,6 @@
 				$password = htmlentities (trim ($_POST['password']), ENT_NOQUOTES);
 				$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-
 				$db = new PDO('mysql:host=localhost;dbname=WebSec01;charset=utf8', "user", "keawebdev16");
 				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -19,7 +18,7 @@
 				}
 				else {
 					//Now let's check if there's a match.
-					$checklogin = $db->prepare("SELECT * FROM Users WHERE Username = :username");
+					$checklogin = $db->prepare("SELECT * FROM Users WHERE Username = :username OR Email = :username");
 					$checklogin->bindValue(":username", $username);
 					$checklogin->execute();
 
@@ -36,11 +35,11 @@
 					else {
 						echo 'Login Fail';
 						// Add login attempt to database
-					$loginTry = $db->prepare("INSERT INTO login_try (ip, username, password) VALUES (:ip, :username, :password)");
-					$loginTry->bindValue(":ip", $_SERVER['REMOTE_ADDR']);
-					$loginTry->bindValue(":username", $username);
-					$loginTry->bindValue(":password", $hashed_password);
-					$loginTry->execute();
+						$loginTry = $db->prepare("INSERT INTO login_try (ip, username, password) VALUES (:ip, :username, :password)");
+						$loginTry->bindValue(":ip", $_SERVER['REMOTE_ADDR']);
+						$loginTry->bindValue(":username", $username);
+						$loginTry->bindValue(":password", $hashed_password);
+						$loginTry->execute();
 						$db = null;
 					}
 				
