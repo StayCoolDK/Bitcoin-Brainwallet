@@ -1,11 +1,14 @@
 <?php
+session_start();
 
-			if(isset ($_POST['username']) && isset ($_POST['password'])) {
+			if(isset ($_POST['username']) && isset ($_POST['password']) && isset($_POST['token'])) {
 
 				$sPeber = 'Qls9j-3as2daLOsxd';
 				// Variables
 				$username = htmlentities (trim ($_POST['username']), ENT_NOQUOTES);
 				$password = htmlentities (trim ($_POST['password']), ENT_NOQUOTES);
+				$sToken = $_POST['token'];
+
 				$hashed_password = password_hash($password.$sPeber, PASSWORD_DEFAULT);
 
 				// use PDO to connect through the privilege restricted user account
@@ -38,7 +41,6 @@
 
 					if($bPassword){
 						echo 'Login Success';
-						echo $plaintext;
 						$db = null;
 					}
 					else {
