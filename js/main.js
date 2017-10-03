@@ -39,11 +39,11 @@ $(document).on("submit", ".registerform", function(e){
 			if (sData == "Registration successful"){
 				swal("Thank you!", "Registration was successful - you can now login.", "success");
 			}
-			else if(sData == "Username or email already exists") {
-				swal("Username or email already exists", "Please choose a different one", "warning");
+			else if(sData == "Username already exists") {
+				swal("Username already exists", "Please choose a different one", "warning");
 			}
-			else if(sData == "There was an error with the email") {
-				swal("There was an error validating the email", "Please retype your email address", "warning");
+			else if(sData == "There was an error verifying the password.") {
+				swal("There was an error validating the password", "Please retype your password", "warning");
 			}
 		});
 	
@@ -63,13 +63,12 @@ $(document).on("click", ".link", function(){
 						<form method="POST" class="registerform">\
 							<input type="text" name="username" class="rUsername" placeholder="&#xf2be; Username" autocomplete="on" required>\
 							<br>\
-							<input type="email" name="email" class="rEmail" placeholder="&#xf003 Email address" autocomplete="on" required><br>\
 							<input type="password" name="password" class="rPassword" placeholder="&#xf084; Password" required><br>\
 							<input type="password" name="password2" class="rPassword2" placeholder="&#xf084; Re-type Password" required>\
 							<br><br>\
 							<input type="submit" class="registerbtn" value="Register">\
-							<div class="returnlink">Return to login</div>\
-							<div class="terms">Terms</div>\
+							<div class="returnlink"><a class="fa fa-sign-in"> Return to login</a></div>\
+							<div class="terms"><a class="fa fa-file-text-o"> Privacy</a></div>\
 						</form>\
 					</div>\
 				</div>\
@@ -89,12 +88,12 @@ $(document).on("click", ".returnlink", function(){
 								<h1 class="h1title">Login</h1>\
 							</div>\
 							<form method="POST" class="loginform">\
-								<input type="text" name="username" class="username" placeholder="&#xf2be; Username/email" required>\
+								<input type="text" name="username" class="username" placeholder="&#xf2be; Username" required>\
 								<br>\
 								<input type="password" name="password" class="password" placeholder="&#xf084; Password" required>\
 								<br><br>\
 								<input type="submit" class="loginbtn" value="Login">\
-								<div class="link">Need to register?</div>\
+								<div class="link"><a class="fa fa-user-plus"> Register account</a></div>\
 							</form>\
 						</div>\
 					</div>\

@@ -42,10 +42,10 @@ body {
   border-radius: 5px; }
 
 .h1title {
-  border-bottom: 2px solid #00c4ff;
   padding-bottom: 7.5px;
   color: black;
-  font-family: 'Noto Sans', sans-serif; }
+  font-family: 'Noto Sans', sans-serif;
+  margin: 0px; }
 
 .app-title {
   text-align: center;
@@ -113,10 +113,116 @@ input:focus {
 .loginbtn:hover {
   background-color: #388E3C; }
 
-.returnlink, .link, .terms {
-  margin-top: 10px;
+.returnlink a, .link a, .terms a, .reset a {
+  margin: 10px 10px 10px 0px;
   font-size: 14px;
-  text-decoration: underline;
   cursor: pointer; }
+
+* {
+  box-sizing: border-box; }
+
+.burger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  border: none; }
+
+.burger__button {
+  display: block;
+  position: relative;
+  background: #2196f3;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  transition: all 0.5s ease;
+  box-shadow: 0px 0px 8px -2px #333; }
+
+.burger__button:hover {
+  border: 0.2px solid black; }
+
+.burger__button.open {
+  border: 2px solid #fff;
+  box-shadow: none; }
+
+.burger__button__icon {
+  display: inline-block;
+  position: absolute;
+  background: #fff;
+  margin: 0 auto;
+  width: 20px;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transition: all 0.5s ease;
+  transform: translateY(-1px); }
+
+.burger__button__icon:before,
+.burger__button__icon:after {
+  content: "";
+  position: absolute;
+  margin: 0 auto;
+  background: #fff;
+  width: 20px;
+  height: 2px;
+  left: 0;
+  right: 0;
+  transition: all 0.5s ease; }
+
+.burger__button__icon:before {
+  bottom: 10px; }
+
+.burger__button__icon:after {
+  top: 10px; }
+
+.burger__button.open .burger__button__icon {
+  background: transparent; }
+
+.burger__button.open .burger__button__icon:before,
+.burger__button.open .burger__button__icon:after {
+  transform-origin: 0 50%;
+  width: 28.28427125px; }
+
+.burger__button.open .burger__button__icon:before {
+  transform: rotateZ(0.7854rad); }
+
+.burger__button.open .burger__button__icon:after {
+  transform: rotateZ(-0.7854rad); }
+
+.burger__menu {
+  list-style-type: none;
+  padding: 20px 20px 20px 20px;
+  margin-top: 40px; }
+
+.burger__menu li {
+  display: block;
+  position: relative;
+  margin: 15px 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+  transform: translateX(-400px); }
+
+.burger__menu a {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: normal;
+  transition: all 0.4s ease;
+  border-left: 3px solid transparent;
+  padding-left: 0; }
+
+.burger__menu a:hover {
+  padding-left: 30px;
+  border-left: 3px solid #fff; }
+
+.burger__button.open + .burger__menu li {
+  transform: translateX(0);
+  visibility: visible; }
+
+.feed {
+  background-color: white; }
 
 /*# sourceMappingURL=style.css.map */

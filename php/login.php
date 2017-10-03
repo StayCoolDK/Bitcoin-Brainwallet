@@ -2,23 +2,31 @@
 
 			if(isset ($_POST['username']) && isset ($_POST['password'])) {
 
+				$sPeber = 'Qls9j-3as2daLOsxd';
 				// Variables
 				$username = htmlentities (trim ($_POST['username']), ENT_NOQUOTES);
 				$password = htmlentities (trim ($_POST['password']), ENT_NOQUOTES);
-				$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+				$hashed_password = password_hash($password.$sPeber, PASSWORD_DEFAULT);
 
+				// use PDO to connect through the privilege restricted user account
 				$db = new PDO('mysql:host=localhost;dbname=WebSec01;charset=utf8', "user", "keawebdev16");
 				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+				// Check if login tries are more than 3
 
-				// Check if login try is more than number 3
-		$countLoginTries = $db->query("SELECT * FROM login_try WHERE ip = '" .$_SERVER['REMOTE_ADDR']. "' AND timestamp > (NOW()-INTERVAL 5 MINUTE)")->rowCount();
-				if ($countLoginTries >= 3){
-					echo 'You have tried to sign in too many times without succeding, please wait up till 5 minutes.';
-				}
-				else {
+					$checkLoginTries = $db->prepare("SELECT * FROM login_try WHERE ip = :ip AND timestamp > (NOW()-INTERVAL 5 MINUTE)");
+					$checkLoginTries->bindValue(":ip", $_SERVER['REMOTE_ADDR']);
+					$checkLoginTries->execute();
+					$countLoginTries = $checkLoginTries->rowCount();
+					if($countLoginTries >= 3){
+						echo 'You have tried to sign in too many times without succeding, please wait up till 5 minutes.';
+					}
+					else {
+
 					//Now let's check if there's a match.
-					$checklogin = $db->prepare("SELECT * FROM Users WHERE Username = :username OR Email = :username");
+
+					$checklogin = $db->prepare("SELECT * FROM Users WHERE Username = :username");
+
 					$checklogin->bindValue(":username", $username);
 					$checklogin->execute();
 
@@ -26,24 +34,22 @@
 					
 					$fUsername = $row['Username'];
 					$fPassword = $row['Password'];
-					$bPassword = password_verify($password, $fPassword);
+					$bPassword = password_verify($password.$sPeber, $fPassword);
 
 					if($bPassword){
 						echo 'Login Success';
+						echo $plaintext;
 						$db = null;
 					}
 					else {
 						echo 'Login Fail';
-						// Add login attempt to database
-						$loginTry = $db->prepare("INSERT INTO login_try (ip, username, password) VALUES (:ip, :username, :password)");
+						// Add unsuccesful login attempt to database
+						$loginTry = $db->prepare("INSERT INTO login_try (ip, username) VALUES (:ip, :username)");
 						$loginTry->bindValue(":ip", $_SERVER['REMOTE_ADDR']);
 						$loginTry->bindValue(":username", $username);
-						$loginTry->bindValue(":password", $hashed_password);
 						$loginTry->execute();
 						$db = null;
 					}
-				
-			    }
-										
+				}						
 			}
 		?>
