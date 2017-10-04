@@ -4,6 +4,7 @@ session_start();
 if(isset ($_POST['username']) && isset ($_POST['password']) && isset ($_POST['password2']) && isset ($_POST['token'])){
 
 		$sPeber = 'Qls9j-3as2daLOsxd';
+		$sToken = $_POST['token'];
 
 		//Trim the input for quotes
 		$sUsername = htmlentities (trim($_POST['username']), ENT_NOQUOTES);
@@ -15,9 +16,15 @@ if(isset ($_POST['username']) && isset ($_POST['password']) && isset ($_POST['pa
 		}
 		else{
 
-		$sToken = $_POST['token'];
 
-		//Hash the trimmed input
+		$uppercase = preg_match('@[A-Z]@', $sPassword);
+		$lowercase = preg_match('@[a-z]@', $sPassword);
+		$number    = preg_match('@[0-9]@', $sPassword);
+
+		if(!$uppercase || !$lowercase || !$number || strlen($sPassword) < 8) {
+		  echo 'password invalid';
+		}
+		else {
 
 		//Newest standard using ARGON requires php v7.2.0:
 		// $hPassword password_hash('$sPassword.$sPeber', PASSWORD_ARGON2I);
@@ -71,6 +78,7 @@ if(isset ($_POST['username']) && isset ($_POST['password']) && isset ($_POST['pa
 			else {
 				echo 'There was an error verifying the password.';
 			}
+		}
 
 		}
 	}

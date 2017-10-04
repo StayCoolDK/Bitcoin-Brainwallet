@@ -91,6 +91,9 @@ $(document).on("submit", ".registerform", function(e){
 			else if(sData == "The passwords do not match."){
 				swal("Passwords do not match", "Please retype the passwords.", "warning");
 			}
+			else if(sData == "password invalid"){
+				swal("Password is invalid.", "Your password must contain 8 characters, with a combination of numbers and big & small letters.", "warning");
+			}
 		}).fail(function(){
 			Swal("Could not connect to server", "We were unable to establish a connection to the server, please try again later.", "error");
 		});
@@ -113,6 +116,9 @@ $(document).on("submit", ".commentform", function(e){
 			}
 			else if (sData == "You need to be logged in to comment"){
 				swal("You need to login to comment", "Please login to comment.", "error");
+			}
+			else if(sData == "Your attempt of CSRF has been prevented and logged."){
+				swal("Fuck Off", "Your attempt of CSRF has been prevented and logged.", "warning");
 			}
 		}).fail(function(){
 			Swal("Could not connect to server", "We were unable to establish a connection to the server, please try again later.", "error");
