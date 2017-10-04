@@ -1,16 +1,26 @@
 <?php
 session_start();
 
-if(isset ($_POST['username']) && isset ($_POST['password']) && isset ($_POST['token'])){
+if(isset ($_POST['username']) && isset ($_POST['password']) && isset ($_POST['password2']) && isset ($_POST['token'])){
 
 		$sPeber = 'Qls9j-3as2daLOsxd';
 
 		//Trim the input for quotes
 		$sUsername = htmlentities (trim($_POST['username']), ENT_NOQUOTES);
 		$sPassword = htmlentities(trim($_POST['password']), ENT_NOQUOTES); 
+		$sPassword2 = htmlentities(trim($_POST['password2']), ENT_NOQUOTES);
+
+		if ($sPassword !== $sPassword2){
+			echo 'The passwords do not match.';
+		}
+		else{
+
 		$sToken = $_POST['token'];
 
 		//Hash the trimmed input
+
+		//Newest standard using ARGON requires php v7.2.0:
+		// $hPassword password_hash('$sPassword.$sPeber', PASSWORD_ARGON2I);
 		$hPassword = password_hash($sPassword.$sPeber, PASSWORD_DEFAULT);
 		$bPassword = password_verify($sPassword.$sPeber, $hPassword);
 
@@ -36,7 +46,7 @@ if(isset ($_POST['username']) && isset ($_POST['password']) && isset ($_POST['to
 				$checkusername->execute();
 				$usernamecount = $checkusername->rowCount();
 
-					if($usernamecount > 0) { //Username already exists
+					if($usernamecount != 0) { //Username already exists
 
 				    echo 'Username already exists';
 				    $db = null;
@@ -63,6 +73,7 @@ if(isset ($_POST['username']) && isset ($_POST['password']) && isset ($_POST['to
 			}
 
 		}
+	}
 }
 
 ?>

@@ -12,6 +12,11 @@ $token = $_SESSION['token'];
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<link rel="stylesheet" type="text/css" href="./css/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+	.cmtUsername {
+		text-decoration: underline;
+	}
+	</style>
 </head>
 <body>
 <div id="wdw-login" class="wdw">
@@ -33,8 +38,7 @@ $token = $_SESSION['token'];
 		</div>
 	</div>
 </div>
-
-<div id="wdw-register" class="wdw">
+<div id="wdw-register" class="wdw" style="display: none">
 	<div class="register">
 		<div class="register-screen">
 			<div class="app-title">
@@ -49,6 +53,21 @@ $token = $_SESSION['token'];
 					<input type="hidden" name="CSRFToken" class="rCSRFToken" value="<?php echo $token; ?>" >
 					<input type="submit" class="registerbtn" value="Register">
 					<div class="returnlink"><a class="fa fa-sign-in"> Return to login</a></div>
+				</form>
+		</div>
+	</div>
+</div>
+<div id="wdw-comment" class="wdw" style="display: none">
+	<div class="comment">
+		<div class="comment-screen">
+			<div classs="app-title">
+				<h1 title="h1title">Leave a comment! :-)</h1>
+			</div>
+			<div class="comments"></div>
+				<form method="POST" class="commentform">
+					<input type="text" class="sComment" name="comment" placeholder="&#xf27b; Comment" required>
+					<input type="hidden" name="CSRFToken" class="cCSRFToken" value="<?php echo $token ?>" >
+					<input type="submit" class="commentbtn" value="Comment">
 				</form>
 		</div>
 	</div>

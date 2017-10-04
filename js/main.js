@@ -1,6 +1,36 @@
 
-$(document).on("submit", ".loginform", function(e){
+LoadComments();
 
+function LoadComments(){
+	$.ajax ({
+		url: "./php/getcomments.php",
+		method: "get",
+		dataType: "JSON"
+	}).done(function(jData){
+		$(".comments").empty();
+		for(var i = 0; i < jData.length; i++){
+			$(".comments").append('<p class="comment">'+jData[i].comment + '<br>' + jData[i].datestamp + '<br>' + '<b>'+jData[i].username+ '</b>' + '<br></p>');
+		}
+	})
+}
+
+$(document).on("click", ".logoutbtn", function(e){
+	//get to logout.php - session_destroy
+	$.ajax ({
+		url: "./php/logout.php",
+		method: "get"
+	}).done(function(sData){
+		if(sData == "session destroyed"){
+			swal("Logged out", "You have been logged out.", "success");
+			$("#wdw-login").show();
+			$("#wdw-comment").hide();
+			$(".logoutbtn").hide();
+		}
+	})
+})
+
+
+$(document).on("submit", ".loginform", function(e){
 	e.preventDefault();
 		$.ajax ({
 			url: "./php/login.php",
@@ -14,6 +44,9 @@ $(document).on("submit", ".loginform", function(e){
 
 		if (sData == "Login Success"){
 				swal("Logged in", "Congratulations!", "success");
+				$("#wdw-comment").show();
+				$("#wdw-login").hide();
+				$("body").append('<a href="#" class="logoutbtn">Logout (Clear session)</div>')
 				//Fade in the wallet controlpanel
 		}
 		else if (sData == "Login Fail"){
@@ -26,6 +59,8 @@ $(document).on("submit", ".loginform", function(e){
 				swal("Fuck Off", "Your attempt of CSRF has been prevented and logged.", "warning");
 			}
 		
+		}).fail(function(){
+			Swal("Could not connect to server", "We were unable to establish a connection to the server, please try again later.", "error");
 		});
 });
 
@@ -37,11 +72,10 @@ $(document).on("submit", ".registerform", function(e){
 			data: {
 						username: $(".rUsername").val(),
 						password: $(".rPassword").val(),
+						password2: $(".rPassword2").val(),
 						token: $(".rCSRFToken").val()
 			}
 		}).done(function(sData){
-
-
 			if (sData == "Registration successful"){
 				swal("Thank you!", "Registration was successful - you can now login.", "success");
 			}
@@ -54,8 +88,35 @@ $(document).on("submit", ".registerform", function(e){
 			else if(sData == "Your attempt of CSRF has been prevented and logged.") {
 				swal("Fuck Off", "Your attempt of CSRF has been prevented and logged.", "warning");
 			}
+			else if(sData == "The passwords do not match."){
+				swal("Passwords do not match", "Please retype the passwords.", "warning");
+			}
+		}).fail(function(){
+			Swal("Could not connect to server", "We were unable to establish a connection to the server, please try again later.", "error");
 		});
 	
+});
+
+$(document).on("submit", ".commentform", function(e){
+	e.preventDefault();
+		$.ajax({
+			url: "./php/postcomment.php",
+			method: "post",
+			data: {
+					comment: $(".sComment").val(),
+					token: $(".cCSRFToken").val()
+			}
+		}).done(function(sData){
+			if (sData == "Successful"){
+				swal("Comment posted!", "Thank you. Your comment has been posted.", "success");
+				LoadComments(); //Update comments.
+			}
+			else if (sData == "You need to be logged in to comment"){
+				swal("You need to login to comment", "Please login to comment.", "error");
+			}
+		}).fail(function(){
+			Swal("Could not connect to server", "We were unable to establish a connection to the server, please try again later.", "error");
+		});
 });
 
 $(document).on("click", ".link", function(){
