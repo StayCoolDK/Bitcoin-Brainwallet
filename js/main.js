@@ -7,15 +7,6 @@ LoadComments();
         grecaptcha.render('RecaptchaField2', {'sitekey' : '6LfROTMUAAAAACGsoVmge9vHtyN3Kqjmtn8ciNwT'});
     };
 
-$.ajax({
-	url: 'https://www.google.com/recaptcha/api/siteverify',
-	method: 'post',
-	secret: '6LfROTMUAAAAACGsoVmge9vHtyN3Kqjmtn8ciNwT',
-	response: $(".g-recaptcha").val()
-}).done(function(sData){
-
-})
-
 function LoadComments(){
 	$.ajax ({
 		url: "./php/getcomments.php",
@@ -62,6 +53,21 @@ $(document).on("submit", ".loginform", function(e){
 				$("#wdw-login").hide();
 				$("body").append('<a href="#" class="logoutbtn">Logout (Clear session)</div>')
 				//Fade in the wallet controlpanel
+
+				//Verify captcha was a success:
+
+				/*
+				$.ajax({
+					url: "https://www.google.com/recaptcha/api/siteverify",
+					method: "POST",
+					dataType: "JSON",
+					data: {
+								secret: "6LfROTMUAAAAACGsoVmge9vHtyN3Kqjmtn8ciNwT",
+								response: $(".g-repatcha-response").val()
+					}
+				}).done(function(jData){
+					console.log(jData.success);
+				}); */
 		}
 		else if (sData == "Login Fail"){
 				swal("WRONG", "WRONG!", "warning");
