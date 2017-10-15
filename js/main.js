@@ -1,6 +1,21 @@
 
 LoadComments();
 
+
+    var CaptchaCallback = function() {
+        grecaptcha.render('RecaptchaField1', {'sitekey' : '6LfROTMUAAAAACGsoVmge9vHtyN3Kqjmtn8ciNwT'});
+        grecaptcha.render('RecaptchaField2', {'sitekey' : '6LfROTMUAAAAACGsoVmge9vHtyN3Kqjmtn8ciNwT'});
+    };
+
+$.ajax({
+	url: 'https://www.google.com/recaptcha/api/siteverify',
+	method: 'post',
+	secret: '6LfROTMUAAAAACGsoVmge9vHtyN3Kqjmtn8ciNwT',
+	response: $(".g-recaptcha").val()
+}).done(function(sData){
+
+})
+
 function LoadComments(){
 	$.ajax ({
 		url: "./php/getcomments.php",
@@ -15,7 +30,6 @@ function LoadComments(){
 }
 
 $(document).on("click", ".logoutbtn", function(e){
-	//get to logout.php - session_destroy
 	$.ajax ({
 		url: "./php/logout.php",
 		method: "get"

@@ -12,9 +12,15 @@ $token = $_SESSION['token'];
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<link rel="stylesheet" type="text/css" href="./css/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
 	<style>
 	.cmtUsername {
 		text-decoration: underline;
+	}
+	.g-recaptcha {
+		    transform: scale(0.825);
+    transform-origin: 0 0;
+    margin-left: 5px;
 	}
 	</style>
 </head>
@@ -32,6 +38,7 @@ $token = $_SESSION['token'];
 				<input type="password" name="password" class="password" placeholder="&#xf084; Password" autocomplete="on" required>
 				<br><br>
 				<input type="hidden" name="CSRFToken" class="CSRFToken" value="<?php echo $token; ?>" >
+				<div class="g-recaptcha" id="RecaptchaField1" data-sitekey="6LfROTMUAAAAACGsoVmge9vHtyN3Kqjmtn8ciNwT"></div>
 				<input type="submit" class="loginbtn" value="Login">
 				<div class="link"><a class="fa fa-user-plus"> Register account</a></div>
 			</form>
@@ -51,6 +58,7 @@ $token = $_SESSION['token'];
 					<input type="password" name="password2" class="rPassword2" placeholder="&#xf084; Re-type Password" required>
 					<br><br>
 					<input type="hidden" name="CSRFToken" class="rCSRFToken" value="<?php echo $token; ?>" >
+					<div class="g-recaptcha" id="RecaptchaField2" data-sitekey="6LfROTMUAAAAACGsoVmge9vHtyN3Kqjmtn8ciNwT"></div>
 					<input type="submit" class="registerbtn" value="Register">
 					<div class="returnlink"><a class="fa fa-sign-in"> Return to login</a></div>
 				</form>
