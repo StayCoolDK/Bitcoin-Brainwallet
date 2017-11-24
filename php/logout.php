@@ -1,6 +1,9 @@
 <?php
 session_start();
-unset($_SESSION["username"]);
-echo 'session destroyed';
+
+if(isset($_SESSION['username'])){
+	unset($_SESSION['username']);
+	echo 'session destroyed';
+}
 
 ?>

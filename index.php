@@ -1,7 +1,19 @@
 <?php
+// Prevents javascript XSS attacks aimed to steal the session ID
+ini_set('session.cookie_httponly', 1);
+
+// Session ID cannot be passed through URLs
+ini_set('session.use_only_cookies', 1);
+
+// Uses a secure connection (HTTPS) if possible
+ini_set('session.cookie_secure', 1);
+
 session_start();
-$_SESSION['token'] = bin2hex(random_bytes(32));
-$token = $_SESSION['token'];
+
+//Generate a cryptographically secure string to use as token:
+$token = bin2hex(random_bytes(32));
+$_SESSION['token'] = $token;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,16 +25,6 @@ $token = $_SESSION['token'];
 	<link rel="stylesheet" type="text/css" href="./css/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
-	<style>
-	.cmtUsername {
-		text-decoration: underline;
-	}
-	.g-recaptcha {
-		    transform: scale(0.825);
-    transform-origin: 0 0;
-    margin-left: 5px;
-	}
-	</style>
 </head>
 <body>
 <div id="wdw-login" class="wdw">
@@ -71,15 +73,15 @@ $token = $_SESSION['token'];
 			<div classs="app-title">
 				<h1 title="h1title">Leave a comment! :-)</h1>
 			</div>
-			<div class="comments"></div>
-				<form method="POST" class="commentform">
+		</div>
+	</div>
+	<form method="POST" class="commentform">
 					<input type="text" class="sComment" name="comment" placeholder="&#xf27b; Comment" required>
 					<input type="hidden" name="CSRFToken" class="cCSRFToken" value="<?php echo $token ?>" >
 					<input type="submit" class="commentbtn" value="Comment">
-				</form>
-		</div>
-	</div>
+	</form>
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./js/sweetalert.min.js"></script>

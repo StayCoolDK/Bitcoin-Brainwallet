@@ -225,4 +225,37 @@ input:focus {
 .feed {
   background-color: white; }
 
+.comments {
+  height: 70px;
+  word-wrap: break-word;
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.comment {
+  padding-right: 20px;
+  margin-top: 100px;
+}
+.sComment {
+  height: 50px;
+  width: 65%;
+}
+.commentbtn {
+  height: 50px;
+  width: 30%;
+}
+.comment-screen {
+  height: 300px;
+  overflow-y: scroll;
+}
+.cmtUsername {
+  text-decoration: underline;
+}
+.g-recaptcha {
+      transform: scale(0.825);
+  transform-origin: 0 0;
+  margin-left: 5px;
+}
 /*# sourceMappingURL=style.css.map */
